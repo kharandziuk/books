@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/:/code/
+      - /code/node_modules
+    ports:
+      - 3000:3000
+    command: /bin/bash -c "yarn && yarn start"

@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container, Box, Grid } from "@material-ui/core";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 export default function App() {
   return (
@@ -36,10 +37,15 @@ export default function App() {
 }
 
 function Home() {
+  const books = useStoreState((state) => state.books.items);
+  console.log(books);
   return (
     <ul>
-      <li>Book 1</li>
-      <li>Book 2</li>
+      {books.map(({ name }, i) => (
+        <li key={name}>
+          Book {i}: {name}
+        </li>
+      ))}
     </ul>
   );
 }

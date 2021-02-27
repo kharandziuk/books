@@ -1,7 +1,6 @@
 from invoke import task
 from pathlib import Path
 from dotenv import load_dotenv
-from datetime import datetime
 
 load_dotenv()
 
@@ -25,3 +24,13 @@ def run(c, cmd):
 @task
 def vagrant_up(c):
     run(c, "vagrant up")
+
+
+@task
+def frontend(c):
+    build_folder = CUR_DIR / 'frontend' / 'build'
+    run(
+        c,
+        "aws s3 cp --recursive "
+        f"{build_folder.absolute()} s3://django-books-app-bucket"
+    )

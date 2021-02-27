@@ -38,6 +38,8 @@ def frontend(c):
             c,
             'yarn build'
         )
+    run(c, 'ls')
+    run(c, 'ls frontend')
     run(
         c,
         "aws s3 cp --recursive "

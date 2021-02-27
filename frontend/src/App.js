@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import {
   useParams,
@@ -7,8 +6,8 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import { Container, Box, Grid } from "@material-ui/core";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { Container, Box } from "@material-ui/core";
+import { useStoreState } from "easy-peasy";
 
 export default function App() {
   return (

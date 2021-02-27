@@ -1,6 +1,4 @@
-import { createStore, action, thunk, computed, persist } from "easy-peasy";
-
-import _ from "lodash";
+import { createStore } from "easy-peasy";
 
 const books = {
   items: [{ name: "my book" }, { name: "his book" }],

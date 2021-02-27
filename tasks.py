@@ -29,6 +29,15 @@ def vagrant_up(c):
 @task
 def frontend(c):
     build_folder = CUR_DIR / 'frontend' / 'build'
+    with c.cd('frontend'):
+        run(
+            c,
+            'yarn'
+        )
+        run(
+            c,
+            'yarn build'
+        )
     run(
         c,
         "aws s3 cp --recursive "

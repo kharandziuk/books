@@ -1,6 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  useParams,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom";
 import { Container, Box, Grid } from "@material-ui/core";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
@@ -14,17 +20,12 @@ export default function App() {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
             </ul>
           </nav>
 
           <Box mt={8}>
             <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
+              <Route path="/:id" children={<About />} />
               <Route path="/">
                 <Home />
               </Route>
@@ -38,12 +39,13 @@ export default function App() {
 
 function Home() {
   const books = useStoreState((state) => state.books.items);
-  console.log(books);
   return (
     <ul>
       {books.map(({ name }, i) => (
         <li key={name}>
-          Book {i}: {name}
+          <Link to={`/${i}`}>
+            Book {i}: {name}
+          </Link>
         </li>
       ))}
     </ul>
@@ -51,5 +53,7 @@ function Home() {
 }
 
 function About() {
-  return <h2>About</h2>;
+  let { id } = useParams();
+  const book = useStoreState((state) => state.books.items[Number(id)]);
+  return <h2>About: {book.name}</h2>;
 }
